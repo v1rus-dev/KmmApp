@@ -5,8 +5,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.20")
-        classpath("com.android.tools.build:gradle:7.3.0-alpha09")
+        val kotlinVersion = "1.6.10"
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        classpath("com.android.tools.build:gradle:7.2.0")
+        classpath("com.squareup.sqldelight:gradle-plugin:1.5.3")
+        classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
     }
 }
 

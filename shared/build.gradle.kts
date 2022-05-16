@@ -1,6 +1,8 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("com.android.library")
+    id("com.squareup.sqldelight")
 }
 
 kotlin {
@@ -17,13 +19,33 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                //Database
+                implementation(Dependencies.SqlDelight.runtime)
+
+                //Http
+                implementation(Dependencies.Ktor.core)
+                implementation(Dependencies.Ktor.serialization)
+
+                implementation(Dependencies.serialization)
+                implementation(Dependencies.Coroutines.core)
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                //Database
+                implementation(Dependencies.SqlDelight.android)
+
+                //Http
+                implementation(Dependencies.Ktor.android)
+            }
+        }
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
@@ -33,6 +55,14 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+
+            dependencies {
+                //Database
+                implementation(Dependencies.SqlDelight.native)
+
+                //Http
+                implementation(Dependencies.Ktor.ios)
+            }
         }
         val iosX64Test by getting
         val iosArm64Test by getting
@@ -46,6 +76,13 @@ kotlin {
     }
 }
 
+sqldelight {
+    database("KmmDatabase") {
+        packageName = "yegor.cheprasov.kmmapp.db"
+        sourceFolders = listOf("sqldelight")
+    }
+}
+
 android {
     compileSdk = 32
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -53,4 +90,33 @@ android {
         minSdk = 21
         targetSdk = 32
     }
+}
+
+object Versions {
+    const val kotlinVersion = "1.6.10"
+    const val sqlDelightVersion = "1.5.3"
+    const val ktorVersion = "2.0.1"
+    const val serializationVersion = "1.2.2"
+}
+
+object Dependencies {
+
+    object SqlDelight {
+        const val runtime = "com.squareup.sqldelight:runtime:${Versions.sqlDelightVersion}"
+        const val android = "com.squareup.sqldelight:android-driver:${Versions.sqlDelightVersion}"
+        const val native = "com.squareup.sqldelight:native-driver:${Versions.sqlDelightVersion}"
+    }
+
+    object Ktor {
+        const val core = "io.ktor:ktor-client-core:${Versions.ktorVersion}"
+        const val android = "io.ktor:ktor-client-android:${Versions.ktorVersion}"
+        const val ios = "io.ktor:ktor-client-ios:${Versions.ktorVersion}"
+        const val serialization = "io.ktor:ktor-client-serialization:${Versions.ktorVersion}"
+    }
+
+    object Coroutines {
+        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-native-mt"
+    }
+
+    const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.serializationVersion}"
 }
