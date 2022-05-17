@@ -27,6 +27,8 @@ kotlin {
                 //Http
                 implementation(Dependencies.Ktor.core)
                 implementation(Dependencies.Ktor.serialization)
+                implementation(Dependencies.Ktor.json)
+                implementation(Dependencies.Ktor.negotiator)
 
                 implementation(Dependencies.serialization)
                 implementation(Dependencies.Coroutines.core)
@@ -97,6 +99,7 @@ object Versions {
     const val sqlDelightVersion = "1.5.3"
     const val ktorVersion = "2.0.1"
     const val serializationVersion = "1.2.2"
+    const val kodeinVersion = "7.11.0"
 }
 
 object Dependencies {
@@ -112,6 +115,8 @@ object Dependencies {
         const val android = "io.ktor:ktor-client-android:${Versions.ktorVersion}"
         const val ios = "io.ktor:ktor-client-ios:${Versions.ktorVersion}"
         const val serialization = "io.ktor:ktor-client-serialization:${Versions.ktorVersion}"
+        const val json = "io.ktor:ktor-serialization-kotlinx-json:${Versions.ktorVersion}"
+        const val negotiator = "io.ktor:ktor-client-content-negotiation:${Versions.ktorVersion}"
     }
 
     object Coroutines {

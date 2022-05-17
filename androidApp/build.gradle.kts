@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -16,6 +17,14 @@ android {
         getByName("release") {
             isMinifyEnabled = false
         }
+    }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.composeVersion
     }
 }
 
@@ -51,6 +60,9 @@ object Versions {
     const val composeViewModelVersion = "2.4.1"
     const val composeConstraint = "1.0.0-beta02"
     const val accompanistVersion = "0.23.1"
+
+    const val hiltVersion = "2.42"
+    const val hiltNavigationComposeVersion = "1.0.0"
 }
 
 object Compose {
@@ -64,7 +76,7 @@ object Compose {
     const val activity = "androidx.activity:activity-compose:${Versions.composeActivityVersion}"
     const val theme = "com.google.android.material:compose-theme-adapter:${Versions.composeVersion}"
     const val liveData = "androidx.compose.runtime:runtime-livedata:${Versions.composeVersion}"
-    const val rxJava ="androidx.compose.runtime:runtime-rxjava2:${Versions.composeVersion}"
+    const val rxJava = "androidx.compose.runtime:runtime-rxjava2:${Versions.composeVersion}"
     const val foundation = "androidx.compose.foundation:foundation:${Versions.composeVersion}"
     const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.composeViewModelVersion}"
     const val constraint = "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraint}"
