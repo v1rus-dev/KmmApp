@@ -54,12 +54,16 @@ dependencies {
     implementation(Compose.viewModel)
     implementation(Compose.accompanist)
     implementation(Compose.accompanistUi)
+    implementation(Compose.accompanistSwipeRefresh)
     implementation(Compose.constraint)
     implementation(Compose.navigation)
 
     implementation(Koin.android)
     implementation(Koin.workManager)
     implementation(Koin.compose)
+
+    implementation(Paging.runtime)
+    implementation(Paging.compose)
 }
 
 object Versions {
@@ -78,6 +82,8 @@ object Versions {
     const val nbvVersion = "1.0.0"
 
     const val koinVersion = "3.2.0"
+    const val pagingVersion = "3.1.1"
+    const val pagingComposeVersion = "1.0.0-alpha14"
 }
 
 object Compose {
@@ -99,6 +105,7 @@ object Compose {
 
     const val accompanist = "com.google.accompanist:accompanist-insets:${Versions.accompanistVersion}"
     const val accompanistUi = "com.google.accompanist:accompanist-insets-ui:${Versions.accompanistVersion}"
+    const val accompanistSwipeRefresh = "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanistVersion}"
 
     const val image = "com.github.jrvansuita:PickImage:+"
 }
@@ -107,4 +114,9 @@ object Koin {
     const val android = "io.insert-koin:koin-android:${Versions.koinVersion}"
     const val workManager = "io.insert-koin:koin-androidx-workmanager:${Versions.koinVersion}"
     const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koinVersion}"
+}
+
+object Paging {
+    const val runtime = "androidx.paging:paging-runtime:${Versions.pagingVersion}"
+    const val compose = "androidx.paging:paging-compose:${Versions.pagingComposeVersion}"
 }

@@ -5,7 +5,7 @@ import org.koin.dsl.KoinAppDeclaration
 
 fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
     appDeclaration()
-    modules(ktorModule, gamesApiModule)
+    modules(ktorModule, gamesApiModule, gamesRepositoryModule)
 }
 
 fun initKoinIos() = initKoin()

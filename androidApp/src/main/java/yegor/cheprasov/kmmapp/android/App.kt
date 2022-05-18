@@ -4,6 +4,7 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import yegor.cheprasov.kmmapp.android.di.appModule
+import yegor.cheprasov.kmmapp.android.di.gameSourceModule
 import yegor.cheprasov.kmmapp.di.initKoin
 
 class App : Application() {
@@ -18,7 +19,7 @@ class App : Application() {
         initKoin {
             androidLogger()
             androidContext(this@App)
-            modules(appModule)
+            modules(appModule, gameSourceModule)
         }
         instance = this
     }

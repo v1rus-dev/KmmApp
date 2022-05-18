@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import yegor.cheprasov.kmmapp.android.presentation.navigation.NavController
+import yegor.cheprasov.kmmapp.android.presentation.compose.navigation.NavController
 import yegor.cheprasov.kmmapp.android.presentation.viewModel.MainViewModel
 
 class MainActivity : AppCompatActivity() {

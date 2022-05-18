@@ -15,14 +15,14 @@ data class GameListResult(
 data class GamePreview(
     val id: Int,
     val name: String,
-    val released: String,
+    val released: String?,
     val tba: Boolean,
     @SerialName("background_image")
-    val backgroundImage: String,
+    val backgroundImage: String?,
     val rating: Float,
     @SerialName("rating_top")
     val ratingTop: Float,
-    val metacritic: Float,
+    val metacritic: Int?,
     val platforms: List<PlatformsObj>
 )
 
@@ -37,5 +37,7 @@ data class PlatformsObj(
 data class Platform(
     val id: Int,
     val slug: String,
-    val name: String
+    val name: String,
+    @SerialName("image_background")
+    val imageBackground: String
 )
