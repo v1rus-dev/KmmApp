@@ -7,5 +7,3 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
     appDeclaration()
     modules(ktorModule, gamesApiModule, gamesRepositoryModule)
 }
-
-fun initKoinIos() = initKoin()

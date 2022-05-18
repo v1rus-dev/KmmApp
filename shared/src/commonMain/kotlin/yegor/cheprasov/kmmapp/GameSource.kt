@@ -2,7 +2,7 @@ package yegor.cheprasov.kmmapp
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import yegor.cheprasov.kmmapp.android.getUrlParam
+import yegor.cheprasov.kmmapp.extentions.getUrlParam
 import yegor.cheprasov.kmmapp.data.GamesRepository
 import yegor.cheprasov.kmmapp.data.entities.GamePreview
 

@@ -1,8 +1,8 @@
-package yegor.cheprasov.kmmapp.android
+package yegor.cheprasov.kmmapp.extentions
 
-import android.net.Uri
+import io.ktor.http.*
 
 fun String.getUrlParam(key: String): String? {
-    val uri: Uri = Uri.parse(this)
-    return uri.getQueryParameter(key)
+    val uru = Url(this).parameters
+    return uru[key]
 }
