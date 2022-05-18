@@ -1,11 +1,10 @@
 package yegor.cheprasov.kmmapp.android.presentation.viewModel
 
 import androidx.lifecycle.*
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import yegor.cheprasov.kmmapp.android.presentation.compose.state.MainScreenState
 import yegor.cheprasov.kmmapp.android.useCase.GameSource
@@ -18,6 +17,7 @@ class MainViewModel(private val gameSource: GameSource) : ViewModel() {
     init {
         refreshStateFlow = MutableStateFlow(false)
         mainStateFlow = MutableStateFlow(MainScreenState.Loading)
+        downloadNextPage()
         getGames()
     }
 
@@ -30,14 +30,20 @@ class MainViewModel(private val gameSource: GameSource) : ViewModel() {
     val refreshState: StateFlow<Boolean>
         get() = refreshStateFlow
 
-    fun refresh() {
-        getGames()
+    fun refresh() = viewModelScope.launch(Dispatchers.IO) {
+        enableRefresh()
+        gameSource.updateList()
+    }
+
+    fun downloadNextPage() = viewModelScope.launch(Dispatchers.IO) {
+        if (!isRefresh) {
+            gameSource.load()
+        }
     }
 
     private fun getGames() = viewModelScope.launch(Dispatchers.IO) {
-        if (!isRefresh) {
-            enableRefresh()
-            mainStateFlow.emit(MainScreenState.Success(Pager(PagingConfig(50)) { gameSource }.flow))
+        gameSource.observeResult.collectLatest {
+            mainStateFlow.emit(MainScreenState.Success(it))
             disableRefresh()
         }
     }

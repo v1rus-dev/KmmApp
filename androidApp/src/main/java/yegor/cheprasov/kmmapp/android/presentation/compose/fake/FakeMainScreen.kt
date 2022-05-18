@@ -1,14 +1,12 @@
 package yegor.cheprasov.kmmapp.android.presentation.compose.fake
 
-import androidx.paging.PagingData
-import kotlinx.coroutines.flow.flowOf
 import yegor.cheprasov.kmmapp.android.presentation.compose.state.MainScreenState
 import yegor.cheprasov.kmmapp.data.entities.GamePreview
 import yegor.cheprasov.kmmapp.data.entities.Platform
 import yegor.cheprasov.kmmapp.data.entities.PlatformsObj
 
 fun getMainFakeScreenSuccess() = MainScreenState.Success(
-    gameList = flowOf(PagingData.from(getFakeGameList()))
+    gameList = getFakeGameList()
 )
 
 fun getFakeGameList() = listOf(

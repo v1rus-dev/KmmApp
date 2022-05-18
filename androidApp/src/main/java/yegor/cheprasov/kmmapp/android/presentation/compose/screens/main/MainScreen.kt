@@ -7,7 +7,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.paging.compose.collectAsLazyPagingItems
 import org.koin.androidx.compose.getViewModel
 import yegor.cheprasov.kmmapp.android.presentation.compose.actions.MainScreenAction
 import yegor.cheprasov.kmmapp.android.presentation.compose.fake.getMainFakeScreenSuccess
@@ -28,6 +27,9 @@ fun MainScreen(
             when(action) {
                 MainScreenAction.Refresh -> {
                     viewModel.refresh()
+                }
+                MainScreenAction.LoadingNextPage -> {
+                    viewModel.downloadNextPage()
                 }
             }
         }
@@ -52,11 +54,10 @@ fun MainScreen(
 
             }
             is MainScreenState.Success -> {
-                val games = state.gameList.collectAsLazyPagingItems()
                 SuccessGameList(
-                    list = games,
+                    list = state.gameList,
                     isRefreshing = isRefresh,
-                    onRefresh = onAction
+                    onAction = onAction
                 )
             }
         }

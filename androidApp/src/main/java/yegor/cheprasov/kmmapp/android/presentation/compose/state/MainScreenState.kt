@@ -6,7 +6,7 @@ import yegor.cheprasov.kmmapp.data.entities.GamePreview
 
 sealed class MainScreenState {
     class Success(
-        val gameList: Flow<PagingData<GamePreview>>
+        val gameList: List<GamePreview>
     ): MainScreenState()
 
     object Loading: MainScreenState()

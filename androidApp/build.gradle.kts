@@ -57,6 +57,7 @@ dependencies {
     implementation(Compose.accompanistSwipeRefresh)
     implementation(Compose.constraint)
     implementation(Compose.navigation)
+    implementation(Compose.coil)
 
     implementation(Koin.android)
     implementation(Koin.workManager)
@@ -74,11 +75,11 @@ object Versions {
     const val composeViewModelVersion = "2.4.1"
     const val composeConstraint = "1.0.0-beta02"
     const val accompanistVersion = "0.23.1"
+    const val coilVersion = "2.1.0"
 
     const val hiltVersion = "2.42"
     const val hiltNavigationComposeVersion = "1.0.0"
 
-    const val kodeinVersion = "7.10.0"
     const val nbvVersion = "1.0.0"
 
     const val koinVersion = "3.2.0"
@@ -108,6 +109,8 @@ object Compose {
     const val accompanistSwipeRefresh = "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanistVersion}"
 
     const val image = "com.github.jrvansuita:PickImage:+"
+
+    const val coil = "io.coil-kt:coil-compose:${Versions.coilVersion}"
 }
 
 object Koin {

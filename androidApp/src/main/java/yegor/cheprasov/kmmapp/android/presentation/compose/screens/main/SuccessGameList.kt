@@ -1,40 +1,36 @@
 package yegor.cheprasov.kmmapp.android.presentation.compose.screens.main
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.paging.PagingData
-import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.compose.ui.unit.dp
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
 import yegor.cheprasov.kmmapp.android.presentation.compose.actions.MainScreenAction
 import yegor.cheprasov.kmmapp.android.presentation.compose.fake.getFakeGameList
+import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.items.MiddleGameItem
 import yegor.cheprasov.kmmapp.data.entities.GamePreview
 
 @Composable
 fun SuccessGameList(
-    list: LazyPagingItems<GamePreview>,
+    list: List<GamePreview>,
     isRefreshing: Boolean,
-    onRefresh: (MainScreenAction) -> Unit
+    onAction: (MainScreenAction) -> Unit
 ) {
     val rememberSwipeRefreshState = rememberSwipeRefreshState(isRefreshing = isRefreshing)
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize()
+            .padding(horizontal = 16.dp)
+            .padding(top = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SwipeRefresh(
             state = rememberSwipeRefreshState,
-            onRefresh = { onRefresh(MainScreenAction.Refresh) },
+            onRefresh = { onAction(MainScreenAction.Refresh) },
             indicator = { state, refreshTrigger ->
                 SwipeRefreshIndicator(
                     state = state,
@@ -44,9 +40,13 @@ fun SuccessGameList(
             }
         ) {
             LazyColumn() {
-                items(list.itemCount) {index ->
-                    list[index]?.let {
-                        Text(text = it.name)
+                items(list.size) { index ->
+                    list[index].let {
+                        MiddleGameItem(gamePreview = it)
+                        Spacer(modifier = Modifier.size(16.dp))
+                        if (index == list.lastIndex - 10) {
+                            onAction(MainScreenAction.LoadingNextPage)
+                        }
                     }
                 }
             }
@@ -57,5 +57,5 @@ fun SuccessGameList(
 @Preview
 @Composable
 fun PreviewSuccessScreen() {
-    SuccessGameList(list = flowOf(PagingData.from(getFakeGameList())).collectAsLazyPagingItems(), isRefreshing = false) {}
+    SuccessGameList(list = getFakeGameList(), isRefreshing = false) {}
 }
