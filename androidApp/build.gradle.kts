@@ -26,6 +26,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.composeVersion
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -33,6 +38,7 @@ dependencies {
     implementation("com.google.android.material:material:1.6.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
 
     implementation(Compose.ui)
     implementation(Compose.material)
@@ -50,6 +56,10 @@ dependencies {
     implementation(Compose.accompanistUi)
     implementation(Compose.constraint)
     implementation(Compose.navigation)
+
+    implementation(Koin.android)
+    implementation(Koin.workManager)
+    implementation(Koin.compose)
 }
 
 object Versions {
@@ -63,6 +73,11 @@ object Versions {
 
     const val hiltVersion = "2.42"
     const val hiltNavigationComposeVersion = "1.0.0"
+
+    const val kodeinVersion = "7.10.0"
+    const val nbvVersion = "1.0.0"
+
+    const val koinVersion = "3.2.0"
 }
 
 object Compose {
@@ -86,4 +101,10 @@ object Compose {
     const val accompanistUi = "com.google.accompanist:accompanist-insets-ui:${Versions.accompanistVersion}"
 
     const val image = "com.github.jrvansuita:PickImage:+"
+}
+
+object Koin {
+    const val android = "io.insert-koin:koin-android:${Versions.koinVersion}"
+    const val workManager = "io.insert-koin:koin-androidx-workmanager:${Versions.koinVersion}"
+    const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koinVersion}"
 }

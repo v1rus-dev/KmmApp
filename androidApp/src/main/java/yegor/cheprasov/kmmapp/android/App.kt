@@ -1,6 +1,10 @@
 package yegor.cheprasov.kmmapp.android
 
 import android.app.Application
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import yegor.cheprasov.kmmapp.android.di.appModule
+import yegor.cheprasov.kmmapp.di.initKoin
 
 class App : Application() {
 
@@ -11,6 +15,11 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        initKoin {
+            androidLogger()
+            androidContext(this@App)
+            modules(appModule)
+        }
         instance = this
     }
 

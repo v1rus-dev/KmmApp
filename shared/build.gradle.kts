@@ -32,6 +32,8 @@ kotlin {
 
                 implementation(Dependencies.serialization)
                 implementation(Dependencies.Coroutines.core)
+
+                implementation(Dependencies.Koin.core)
             }
         }
         val commonTest by getting {
@@ -99,7 +101,7 @@ object Versions {
     const val sqlDelightVersion = "1.5.3"
     const val ktorVersion = "2.0.1"
     const val serializationVersion = "1.2.2"
-    const val kodeinVersion = "7.11.0"
+    const val koinVersion = "3.2.0"
 }
 
 object Dependencies {
@@ -121,6 +123,10 @@ object Dependencies {
 
     object Coroutines {
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-native-mt"
+    }
+
+    object Koin {
+        const val core = "io.insert-koin:koin-core:${Versions.koinVersion}"
     }
 
     const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.serializationVersion}"
