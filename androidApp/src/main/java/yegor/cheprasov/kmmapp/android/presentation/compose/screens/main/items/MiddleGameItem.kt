@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import yegor.cheprasov.kmmapp.android.presentation.compose.fake.getFakeGameList
+import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.getFakeGameList
 import yegor.cheprasov.kmmapp.data.entities.GamePreview
 
 @Composable

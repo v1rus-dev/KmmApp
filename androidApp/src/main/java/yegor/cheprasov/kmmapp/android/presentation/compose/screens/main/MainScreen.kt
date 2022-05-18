@@ -8,8 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
-import yegor.cheprasov.kmmapp.android.presentation.compose.actions.MainScreenAction
-import yegor.cheprasov.kmmapp.android.presentation.compose.fake.getMainFakeScreenSuccess
 import yegor.cheprasov.kmmapp.android.presentation.compose.state.MainScreenState
 import yegor.cheprasov.kmmapp.android.presentation.viewModel.MainViewModel
 

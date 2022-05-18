@@ -10,8 +10,6 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import yegor.cheprasov.kmmapp.android.presentation.compose.actions.MainScreenAction
-import yegor.cheprasov.kmmapp.android.presentation.compose.fake.getFakeGameList
 import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.items.MiddleGameItem
 import yegor.cheprasov.kmmapp.data.entities.GamePreview
 

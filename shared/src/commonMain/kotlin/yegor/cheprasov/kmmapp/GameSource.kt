@@ -1,4 +1,4 @@
-package yegor.cheprasov.kmmapp.android.useCase
+package yegor.cheprasov.kmmapp
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow

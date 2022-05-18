@@ -1,4 +1,4 @@
-package yegor.cheprasov.kmmapp.android.presentation.compose.fake
+package yegor.cheprasov.kmmapp.android.presentation.compose.screens.main
 
 import yegor.cheprasov.kmmapp.android.presentation.compose.state.MainScreenState
 import yegor.cheprasov.kmmapp.data.entities.GamePreview

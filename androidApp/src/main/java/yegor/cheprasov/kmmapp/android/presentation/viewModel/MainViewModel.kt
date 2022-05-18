@@ -7,17 +7,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import yegor.cheprasov.kmmapp.android.presentation.compose.state.MainScreenState
-import yegor.cheprasov.kmmapp.android.useCase.GameSource
+import yegor.cheprasov.kmmapp.GameSource
 
 class MainViewModel(private val gameSource: GameSource) : ViewModel() {
 
-    private val refreshStateFlow: MutableStateFlow<Boolean>
-    private val mainStateFlow: MutableStateFlow<MainScreenState>
+    private val refreshStateFlow: MutableStateFlow<Boolean> = MutableStateFlow(true)
+    private val mainStateFlow: MutableStateFlow<MainScreenState> = MutableStateFlow(MainScreenState.Loading)
 
     init {
-        refreshStateFlow = MutableStateFlow(false)
-        mainStateFlow = MutableStateFlow(MainScreenState.Loading)
-        downloadNextPage()
+        refresh()
         getGames()
     }
 

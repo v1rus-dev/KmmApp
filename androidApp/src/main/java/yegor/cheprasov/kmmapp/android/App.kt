@@ -4,7 +4,7 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import yegor.cheprasov.kmmapp.android.di.appModule
-import yegor.cheprasov.kmmapp.android.di.gameSourceModule
+import yegor.cheprasov.kmmapp.di.gameSourceModule
 import yegor.cheprasov.kmmapp.di.initKoin
 
 class App : Application() {
