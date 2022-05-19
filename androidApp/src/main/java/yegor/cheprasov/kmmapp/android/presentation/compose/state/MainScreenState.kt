@@ -1,6 +1,6 @@
 package yegor.cheprasov.kmmapp.android.presentation.compose.state
 
-import yegor.cheprasov.kmmapp.data.entities.GamePreview
+import yegor.cheprasov.kmmapp.android.GamePreview
 
 sealed class MainScreenState {
     class Success(
@@ -9,5 +9,5 @@ sealed class MainScreenState {
 
     object Loading: MainScreenState()
 
-    object ErrorL: MainScreenState()
+    object Error: MainScreenState()
 }

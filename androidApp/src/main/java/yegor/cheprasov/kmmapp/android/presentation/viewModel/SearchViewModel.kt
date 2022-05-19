@@ -1,0 +1,6 @@
+package yegor.cheprasov.kmmapp.android.presentation.viewModel
+
+import androidx.lifecycle.ViewModel
+
+class SearchViewModel : ViewModel() {
+}

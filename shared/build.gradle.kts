@@ -3,6 +3,13 @@ plugins {
     kotlin("plugin.serialization")
     id("com.android.library")
     id("com.squareup.sqldelight")
+    id("dev.icerock.mobile.multiplatform-resources")
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "yegor.cheprasov.kmmapp" // required
+    iosBaseLocalizationRegion = "en" // optional, default "en"
+    multiplatformResourcesSourceSet = "commonMain"  // optional, default "commonMain"
 }
 
 kotlin {
@@ -34,6 +41,10 @@ kotlin {
                 implementation(Dependencies.Coroutines.core)
 
                 implementation(Dependencies.Koin.core)
+
+                api("dev.icerock.moko:resources:0.20.0")
+                api("dev.icerock.moko:parcelize:0.8.0")
+                api("dev.icerock.moko:graphics:0.9.0")
             }
         }
         val commonTest by getting {
@@ -48,6 +59,7 @@ kotlin {
 
                 //Http
                 implementation(Dependencies.Ktor.android)
+                api("dev.icerock.moko:resources-compose:0.20.0")
             }
         }
         val androidTest by getting

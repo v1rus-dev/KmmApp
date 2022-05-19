@@ -2,7 +2,9 @@ package yegor.cheprasov.kmmapp.android.presentation.compose.screens.main
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -10,8 +12,10 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import yegor.cheprasov.kmmapp.android.GamePreview
+import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.action.MainScreenAction
+import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.fake.getFakeGameList
 import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.items.MiddleGameItem
-import yegor.cheprasov.kmmapp.data.entities.GamePreview
 
 @Composable
 fun SuccessGameList(
@@ -20,6 +24,8 @@ fun SuccessGameList(
     onAction: (MainScreenAction) -> Unit
 ) {
     val rememberSwipeRefreshState = rememberSwipeRefreshState(isRefreshing = isRefreshing)
+    val scrollState = rememberLazyListState()
+    onAction(MainScreenAction.ChangeScrollPosition(scrollState.firstVisibleItemIndex))
     Column(
         modifier = Modifier.fillMaxSize()
             .padding(horizontal = 16.dp)
@@ -37,12 +43,15 @@ fun SuccessGameList(
                 )
             }
         ) {
-            LazyColumn() {
+            LazyColumn(
+                state = scrollState,
+                contentPadding = PaddingValues(top = 140.dp)
+            ) {
                 items(list.size) { index ->
                     list[index].let {
                         MiddleGameItem(gamePreview = it)
                         Spacer(modifier = Modifier.size(16.dp))
-                        if (index == list.lastIndex - 10) {
+                        if (index == list.lastIndex - 3) {
                             onAction(MainScreenAction.LoadingNextPage)
                         }
                     }

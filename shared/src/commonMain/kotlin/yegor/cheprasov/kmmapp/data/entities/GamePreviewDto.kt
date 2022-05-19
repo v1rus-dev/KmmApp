@@ -4,15 +4,15 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GameListResult(
+data class GameListResultDto(
     val count: Int,
     val next: String,
     val previous: String?,
-    val results: List<GamePreview>
+    val results: List<GamePreviewDto>
 )
 
 @Serializable
-data class GamePreview(
+data class GamePreviewDto(
     val id: Int,
     val name: String,
     val released: String?,
@@ -23,18 +23,18 @@ data class GamePreview(
     @SerialName("rating_top")
     val ratingTop: Float,
     val metacritic: Int?,
-    val platforms: List<PlatformsObj>
+    val platforms: List<PlatformsObjDto>
 )
 
 @Serializable
-data class PlatformsObj(
-    val platform: Platform,
+data class PlatformsObjDto(
+    val platform: PlatformDto,
     @SerialName("released_at")
     val releasedAt: String?
 )
 
 @Serializable
-data class Platform(
+data class PlatformDto(
     val id: Int,
     val slug: String,
     val name: String,
