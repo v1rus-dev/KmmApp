@@ -2,7 +2,6 @@ package yegor.cheprasov.kmmapp.android.presentation.compose.screens.main
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.AppBarDefaults
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -17,6 +16,7 @@ import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.action.M
 import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.fake.getMainFakeScreenSuccess
 import yegor.cheprasov.kmmapp.android.presentation.compose.state.MainScreenState
 import yegor.cheprasov.kmmapp.android.presentation.viewModel.MainViewModel
+import yegor.cheprasov.kmmapp.android.utils.ViewType
 
 @Composable
 fun MainScreen(
@@ -26,11 +26,13 @@ fun MainScreen(
     val mainState = viewModel.mainState.collectAsState()
     val refreshState = viewModel.refreshState.collectAsState()
     val scrollPosition = viewModel.scrollUp.collectAsState()
+    val viewType = viewModel.viewType.collectAsState()
     MainScreen(
         state = mainState.value,
         isRefresh = refreshState.value,
         scrollUpState = scrollPosition,
         searchText = "",
+        viewType = viewType.value,
         onAction = { action ->
             when (action) {
                 MainScreenAction.Refresh -> {
@@ -38,6 +40,9 @@ fun MainScreen(
                 }
                 MainScreenAction.LoadingNextPage -> {
                     viewModel.downloadNextPage()
+                }
+                MainScreenAction.ChangeViewType -> {
+                    viewModel.changeViewType()
                 }
                 is MainScreenAction.ChangeScrollPosition -> {
                     viewModel.updateScrollPosition(action.newPosition)
@@ -53,6 +58,7 @@ fun MainScreen(
     isRefresh: Boolean,
     scrollUpState: State<Boolean>,
     searchText: String,
+    viewType: ViewType,
     onAction: (MainScreenAction) -> Unit
 ) {
     Scaffold(
@@ -71,6 +77,7 @@ fun MainScreen(
                     SuccessGameList(
                         list = state.gameList,
                         isRefreshing = isRefresh,
+                        viewType = viewType,
                         onAction = onAction
                     )
                 }
@@ -78,7 +85,10 @@ fun MainScreen(
             MainAppbar(
                 onTextChanged = {},
                 onClickFilter = {},
-                onClickViewType = {},
+                onClickViewType = {
+                    onAction(MainScreenAction.ChangeViewType)
+                },
+                viewType = viewType,
                 scrollUpState = scrollUpState,
                 text = searchText
             )
@@ -94,6 +104,7 @@ fun PreviewMainScreen() {
         state = getMainFakeScreenSuccess(),
         isRefresh = false,
         searchText = "",
+        viewType = ViewType.MINI,
         scrollUpState = MutableStateFlow(false).collectAsState(),
         onAction = {}
     )

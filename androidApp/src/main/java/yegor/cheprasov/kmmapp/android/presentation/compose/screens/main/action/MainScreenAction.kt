@@ -4,4 +4,5 @@ sealed class MainScreenAction {
     object Refresh: MainScreenAction()
     object LoadingNextPage: MainScreenAction()
     class ChangeScrollPosition(val newPosition: Int): MainScreenAction()
+    object ChangeViewType: MainScreenAction()
 }

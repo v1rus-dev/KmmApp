@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.flow.MutableStateFlow
 import yegor.cheprasov.kmmapp.android.R
+import yegor.cheprasov.kmmapp.android.utils.ViewType
 
 @Composable
 fun MainAppbar(
@@ -26,6 +27,7 @@ fun MainAppbar(
     scrollUpState: State<Boolean?>,
     text: String,
     onClickFilter: () -> Unit,
+    viewType: ViewType,
     onClickViewType: () -> Unit,
     onTextChanged: (String) -> Unit
 ) {
@@ -109,12 +111,13 @@ fun MainAppbar(
                     defaultElevation = 0.dp
                 ),
                 onClick = { onClickViewType() }) {
-                Row() {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_view_type),
+                        painter = painterResource(id = when(viewType) {
+                            ViewType.MINI -> R.drawable.ic_view_type_lines
+                            ViewType.MIDDLE -> R.drawable.ic_view_type
+                        }),
                         contentDescription = null
                     )
-                }
             }
         }
     }
@@ -127,6 +130,7 @@ fun PreviewMainAppbar() {
         scrollUpState = MutableStateFlow(false).collectAsState(),
         onTextChanged = {},
         text = "",
+        viewType = ViewType.MIDDLE,
         onClickFilter = {},
         onClickViewType = {}
     )

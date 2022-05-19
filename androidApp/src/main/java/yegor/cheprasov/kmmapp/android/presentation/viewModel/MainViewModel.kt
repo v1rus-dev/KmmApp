@@ -8,6 +8,7 @@ import yegor.cheprasov.kmmapp.android.GamePreview
 import yegor.cheprasov.kmmapp.android.presentation.compose.state.MainScreenState
 import yegor.cheprasov.kmmapp.GameSource
 import yegor.cheprasov.kmmapp.android.Platform
+import yegor.cheprasov.kmmapp.android.utils.ViewType
 import yegor.cheprasov.kmmapp.enitities.GamePreviewEntity
 import yegor.cheprasov.kmmapp.extentions.containsBy
 import yegor.cheprasov.kmmapp.extentions.setByWithList
@@ -22,6 +23,10 @@ class MainViewModel(private val gameSource: GameSource) : ViewModel() {
     private val scrollUpMutable = MutableStateFlow(false)
     val scrollUp: StateFlow<Boolean>
         get() = scrollUpMutable
+
+    private val mutableViewType = MutableStateFlow(ViewType.MINI)
+    val viewType: StateFlow<ViewType>
+        get() = mutableViewType
 
     init {
         refresh()
@@ -56,6 +61,16 @@ class MainViewModel(private val gameSource: GameSource) : ViewModel() {
             gameSource.load()
             isLoading = false
         }
+    }
+
+    fun changeViewType() = viewModelScope.launch {
+        mutableViewType.emit(
+            if (viewType.value == ViewType.MIDDLE) {
+                ViewType.MINI
+            } else {
+                ViewType.MIDDLE
+            }
+        )
     }
 
     private fun getGames() = viewModelScope.launch(Dispatchers.IO) {
