@@ -35,6 +35,7 @@ fun SuccessGameList(
         SwipeRefresh(
             state = rememberSwipeRefreshState,
             onRefresh = { onAction(MainScreenAction.Refresh) },
+            indicatorPadding = PaddingValues(140.dp),
             indicator = { state, refreshTrigger ->
                 SwipeRefreshIndicator(
                     state = state,
