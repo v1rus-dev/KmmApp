@@ -3,6 +3,7 @@ package yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.items
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -15,6 +16,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,33 +28,44 @@ import coil.compose.SubcomposeAsyncImageContent
 import yegor.cheprasov.kmmapp.android.GamePreview
 import yegor.cheprasov.kmmapp.android.Platform
 import yegor.cheprasov.kmmapp.android.presentation.compose.components.ShimLoadingEffect
+import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.action.MainScreenAction
 import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.fake.getFakeGameList
 
 @Composable
 fun MiddleGameItem(
-    gamePreview: GamePreview
+    gamePreview: GamePreview,
+    onClickOnGame: (MainScreenAction) -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable(
+                role = Role.Image
+            ) {
+                onClickOnGame(
+                    MainScreenAction.OpenGame(gamePreview)
+                )
+            }
             .height(184.dp),
         shape = RoundedCornerShape(15.dp)
     ) {
-        Box(contentAlignment = Alignment.Center, modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black)) {
+        Box(
+            contentAlignment = Alignment.Center, modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black)
+        ) {
             gamePreview.backgroundImage?.let {
                 SubcomposeAsyncImage(
                     model = it,
                     contentDescription = null,
                     contentScale = ContentScale.Crop
                 ) {
-                   val state = painter.state
-                   if (state is AsyncImagePainter.State.Loading) {
-                       ShimLoadingEffect(184.dp)
-                   } else {
-                       SubcomposeAsyncImageContent()
-                   }
+                    val state = painter.state
+                    if (state is AsyncImagePainter.State.Loading) {
+                        ShimLoadingEffect(184.dp)
+                    } else {
+                        SubcomposeAsyncImageContent()
+                    }
                 }
             }
             Row(
@@ -131,5 +144,5 @@ fun MiddleGameItem(
 @Preview
 @Composable
 private fun PreviewMiddleGameItem() {
-    MiddleGameItem(gamePreview = getFakeGameList()[0])
+    MiddleGameItem(gamePreview = getFakeGameList()[0], onClickOnGame = {})
 }

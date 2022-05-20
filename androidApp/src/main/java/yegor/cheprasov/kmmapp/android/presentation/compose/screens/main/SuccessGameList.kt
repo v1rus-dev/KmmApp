@@ -62,7 +62,7 @@ fun SuccessGameList(
                     ) {
                         items(list.size) { index ->
                             list[index].let {
-                                MiniGameItem(gamePreview = it)
+                                MiniGameItem(gamePreview = it, onAction)
                                 if (index == list.lastIndex - 6) {
                                     onAction(MainScreenAction.LoadingNextPage)
                                 }
@@ -76,7 +76,7 @@ fun SuccessGameList(
                 ) {
                     items(list.size) { index ->
                         list[index].let {
-                            MiddleGameItem(gamePreview = it)
+                            MiddleGameItem(gamePreview = it, onAction)
                             Spacer(modifier = Modifier.size(16.dp))
                             if (index == list.lastIndex - 3) {
                                 onAction(MainScreenAction.LoadingNextPage)

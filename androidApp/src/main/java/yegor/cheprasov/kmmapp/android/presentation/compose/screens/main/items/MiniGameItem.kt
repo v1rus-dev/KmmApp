@@ -1,21 +1,23 @@
 package yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.items
 
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -28,14 +30,24 @@ import coil.compose.SubcomposeAsyncImageContent
 import yegor.cheprasov.kmmapp.android.GamePreview
 import yegor.cheprasov.kmmapp.android.Platform
 import yegor.cheprasov.kmmapp.android.presentation.compose.components.ShimLoadingEffect
+import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.action.MainScreenAction
 import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.fake.getFakeGameList
 
 @Composable
 fun MiniGameItem(
-    gamePreview: GamePreview
+    gamePreview: GamePreview,
+    onClickOnGame: (MainScreenAction) -> Unit
 ) {
     Card(
-        modifier = Modifier.size(163.dp),
+        modifier = Modifier
+            .size(163.dp)
+            .clickable(
+                role = Role.Image
+            ) {
+                onClickOnGame(
+                    MainScreenAction.OpenGame(gamePreview)
+                )
+            },
         shape = RoundedCornerShape(10.dp)
     ) {
         Box(
@@ -136,5 +148,5 @@ fun MiniGameItem(
 @Preview
 @Composable
 private fun PreviewMiniGameItem() {
-    MiniGameItem(gamePreview = getFakeGameList()[0])
+    MiniGameItem(gamePreview = getFakeGameList()[0], onClickOnGame = { })
 }

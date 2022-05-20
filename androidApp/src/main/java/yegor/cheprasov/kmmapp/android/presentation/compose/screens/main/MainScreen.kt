@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.getViewModel
 import yegor.cheprasov.kmmapp.android.presentation.compose.components.MainAppbar
+import yegor.cheprasov.kmmapp.android.presentation.compose.navigation.navigateToDetailsGame
 import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.action.MainScreenAction
 import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.fake.getMainFakeScreenSuccess
 import yegor.cheprasov.kmmapp.android.presentation.compose.state.MainScreenState
@@ -46,6 +47,13 @@ fun MainScreen(
                 }
                 is MainScreenAction.ChangeScrollPosition -> {
                     viewModel.updateScrollPosition(action.newPosition)
+                }
+                is MainScreenAction.OpenGame -> {
+                    navController.navigateToDetailsGame(
+                        action.gamePreview.id.toString(),
+                        action.gamePreview.backgroundImage,
+                        action.gamePreview.name
+                    )
                 }
             }
         }
