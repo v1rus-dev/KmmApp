@@ -1,4 +1,4 @@
-package yegor.cheprasov.kmmapp.data.entities
+package yegor.cheprasov.kmmapp.data.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

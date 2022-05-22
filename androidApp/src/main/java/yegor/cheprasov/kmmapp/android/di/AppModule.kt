@@ -9,5 +9,5 @@ import yegor.cheprasov.kmmapp.android.presentation.viewModel.SearchViewModel
 val appModule = module {
     viewModel { MainViewModel(get()) }
     viewModel { SearchViewModel() }
-    viewModel { DetailsViewModel() }
+    viewModel { DetailsViewModel(get()) }
 }

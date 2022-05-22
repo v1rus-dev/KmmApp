@@ -1,7 +1,11 @@
 package yegor.cheprasov.kmmapp
 
-import yegor.cheprasov.kmmapp.data.entities.GamePreviewDto
-import yegor.cheprasov.kmmapp.data.entities.PlatformsObjDto
+import yegor.cheprasov.kmmapp.data.dto.DetailsGameDto
+import yegor.cheprasov.kmmapp.data.dto.GamePreviewDto
+import yegor.cheprasov.kmmapp.data.dto.PlatformsObjDto
+import yegor.cheprasov.kmmapp.data.dto.ScreenshotsGameObjDto
+import yegor.cheprasov.kmmapp.enitities.ContentElementsEntities
+import yegor.cheprasov.kmmapp.enitities.GameDetailsEntities
 import yegor.cheprasov.kmmapp.enitities.GamePreviewEntity
 import yegor.cheprasov.kmmapp.enitities.PlatformType
 
@@ -27,3 +31,31 @@ fun PlatformsObjDto.mapToPlatform(): PlatformType =
         "xbox-series-x" -> PlatformType.Xbox(this.releasedAt)
         else -> PlatformType.Other(this.releasedAt)
     }
+
+fun DetailsGameDto.mapToPreview(screenshotsGameDto: ScreenshotsGameObjDto): GameDetailsEntities =
+    GameDetailsEntities(
+        id = this.id,
+        name = this.name,
+        nameOriginal = nameOriginal,
+        description = description,
+        metacritic = metacritic,
+        contentsElements = getContentElements(this),
+        website = website,
+        rating = rating,
+        screenshotsCount = screenshotsCount,
+        platforms = platforms,
+        screenshots = screenshotsGameDto.results.map { it.imageUrl }
+    )
+
+private fun getContentElements(detailsGameDto: DetailsGameDto): List<ContentElementsEntities> {
+    val result = arrayListOf<ContentElementsEntities>()
+    if (detailsGameDto.released != null && detailsGameDto.released.isNotEmpty()) {
+        result.add(
+            ContentElementsEntities(
+                title = "Release date",
+                value = detailsGameDto.released
+            )
+        )
+    }
+    return result.toList()
+}

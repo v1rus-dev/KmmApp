@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import yegor.cheprasov.kmmapp.android.presentation.compose.screens.detailsGame.DetailsGame
 import yegor.cheprasov.kmmapp.android.presentation.compose.screens.main.MainScreen
+import yegor.cheprasov.kmmapp.android.presentation.compose.screens.readMore.ReadMoreScreen
 
 @Composable
 fun NavController(navController: NavHostController, startDestination: String = "main") {
@@ -24,7 +25,7 @@ fun NavController(navController: NavHostController, startDestination: String = "
                 val gameId = bundle.getString("gameId")
                 val imageUrl = bundle.getString("imageUrl")
                 val gameName = bundle.getString("gameName")
-                gameId?.let {
+                if (gameId != null && gameName != null) {
                     DetailsGame(
                         navController = navController,
                         gameId = gameId,
@@ -34,8 +35,16 @@ fun NavController(navController: NavHostController, startDestination: String = "
                 }
             }
         }
+        composable(
+            "readMore"
+        ) { backStackEntry ->
+            ReadMoreScreen()
+        }
     }
 }
 
 fun NavController.navigateToDetailsGame(gameId: String, imageUrl: String?, gameName: String) =
     this.navigate("detailsGame/$gameId?imageUrl=$imageUrl?gameName=$gameName")
+
+fun NavController.navigateToReadMore() =
+    this.navigate("readMore")
