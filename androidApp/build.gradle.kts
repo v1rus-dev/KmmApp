@@ -18,12 +18,18 @@ android {
             isMinifyEnabled = false
             isShrinkResources = false
             isDebuggable = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -48,31 +54,34 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
 
-    implementation(Compose.ui)
-    implementation(Compose.material)
-    implementation(Compose.materialIconsCore)
-    implementation(Compose.materialIconsExtended)
-    implementation(Compose.animation)
-    debugImplementation(Compose.tooling)
-    implementation(Compose.toolingPreview)
-    implementation(Compose.activity)
-    implementation(Compose.theme)
-    implementation(Compose.liveData)
-    implementation(Compose.rxJava)
-    implementation(Compose.viewModel)
-    implementation(Compose.accompanist)
-    implementation(Compose.accompanistUi)
-    implementation(Compose.accompanistSwipeRefresh)
-    implementation(Compose.constraint)
-    implementation(Compose.navigation)
-    implementation(Compose.coil)
+    implementation(Dependencies.Compose.ui)
+    implementation(Dependencies.Compose.material)
+    implementation(Dependencies.Compose.materialIconsCore)
+    implementation(Dependencies.Compose.materialIconsExtended)
+    implementation(Dependencies.Compose.animation)
+    debugImplementation(Dependencies.Compose.tooling)
+    implementation(Dependencies.Compose.toolingPreview)
+    implementation(Dependencies.Compose.activity)
+    implementation(Dependencies.Compose.theme)
+    implementation(Dependencies.Compose.liveData)
+    implementation(Dependencies.Compose.rxJava)
+    implementation(Dependencies.Compose.viewModel)
+    implementation(Dependencies.Compose.accompanist)
+    implementation(Dependencies.Compose.accompanistUi)
+    implementation(Dependencies.Compose.accompanistSwipeRefresh)
+    implementation(Dependencies.Compose.constraint)
+    implementation(Dependencies.Compose.navigation)
+    implementation(Dependencies.Compose.coil)
 
-    implementation(Koin.android)
-    implementation(Koin.workManager)
-    implementation(Koin.compose)
+    implementation(Dependencies.Koin.android)
+    implementation(Dependencies.Koin.workManager)
+    implementation(Dependencies.Koin.compose)
 
-    implementation(Paging.runtime)
-    implementation(Paging.compose)
+    implementation(Dependencies.Paging.runtime)
+    implementation(Dependencies.Paging.compose)
+
+    implementation(Dependencies.androidDecompose)
+    implementation(Dependencies.decomposeExtension)
 }
 
 object Versions {
@@ -93,41 +102,61 @@ object Versions {
     const val koinVersion = "3.2.0"
     const val pagingVersion = "3.1.1"
     const val pagingComposeVersion = "1.0.0-alpha14"
+    const val decomposeVersion = "0.6.0"
 }
 
-object Compose {
-    const val ui = "androidx.compose.ui:ui:${Versions.composeVersion}"
-    const val material = "androidx.compose.material:material:${Versions.composeVersion}"
-    const val materialIconsCore = "androidx.compose.material:material-icons-core:${Versions.composeVersion}"
-    const val materialIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.composeVersion}"
-    const val animation = "androidx.compose.animation:animation:${Versions.composeVersion}"
-    const val tooling = "androidx.compose.ui:ui-tooling:${Versions.composeVersion}"
-    const val toolingPreview = "androidx.compose.ui:ui-tooling-preview:${Versions.composeVersion}"
-    const val activity = "androidx.activity:activity-compose:${Versions.composeActivityVersion}"
-    const val theme = "com.google.android.material:compose-theme-adapter:${Versions.composeVersion}"
-    const val liveData = "androidx.compose.runtime:runtime-livedata:${Versions.composeVersion}"
-    const val rxJava = "androidx.compose.runtime:runtime-rxjava2:${Versions.composeVersion}"
-    const val foundation = "androidx.compose.foundation:foundation:${Versions.composeVersion}"
-    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.composeViewModelVersion}"
-    const val constraint = "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraint}"
-    const val navigation = "androidx.navigation:navigation-compose:${Versions.navigationVersion}"
+object Dependencies {
 
-    const val accompanist = "com.google.accompanist:accompanist-insets:${Versions.accompanistVersion}"
-    const val accompanistUi = "com.google.accompanist:accompanist-insets-ui:${Versions.accompanistVersion}"
-    const val accompanistSwipeRefresh = "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanistVersion}"
+    object Compose {
+        const val ui = "androidx.compose.ui:ui:${Versions.composeVersion}"
+        const val material = "androidx.compose.material:material:${Versions.composeVersion}"
+        const val materialIconsCore =
+            "androidx.compose.material:material-icons-core:${Versions.composeVersion}"
+        const val materialIconsExtended =
+            "androidx.compose.material:material-icons-extended:${Versions.composeVersion}"
+        const val animation = "androidx.compose.animation:animation:${Versions.composeVersion}"
+        const val tooling = "androidx.compose.ui:ui-tooling:${Versions.composeVersion}"
+        const val toolingPreview =
+            "androidx.compose.ui:ui-tooling-preview:${Versions.composeVersion}"
+        const val activity = "androidx.activity:activity-compose:${Versions.composeActivityVersion}"
+        const val theme =
+            "com.google.android.material:compose-theme-adapter:${Versions.composeVersion}"
+        const val liveData = "androidx.compose.runtime:runtime-livedata:${Versions.composeVersion}"
+        const val rxJava = "androidx.compose.runtime:runtime-rxjava2:${Versions.composeVersion}"
+        const val foundation = "androidx.compose.foundation:foundation:${Versions.composeVersion}"
+        const val viewModel =
+            "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.composeViewModelVersion}"
+        const val constraint =
+            "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraint}"
+        const val navigation =
+            "androidx.navigation:navigation-compose:${Versions.navigationVersion}"
 
-    const val image = "com.github.jrvansuita:PickImage:+"
+        const val accompanist =
+            "com.google.accompanist:accompanist-insets:${Versions.accompanistVersion}"
+        const val accompanistUi =
+            "com.google.accompanist:accompanist-insets-ui:${Versions.accompanistVersion}"
+        const val accompanistSwipeRefresh =
+            "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanistVersion}"
 
-    const val coil = "io.coil-kt:coil-compose:${Versions.coilVersion}"
-}
+        const val image = "com.github.jrvansuita:PickImage:+"
 
-object Koin {
-    const val android = "io.insert-koin:koin-android:${Versions.koinVersion}"
-    const val workManager = "io.insert-koin:koin-androidx-workmanager:${Versions.koinVersion}"
-    const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koinVersion}"
-}
+        const val coil = "io.coil-kt:coil-compose:${Versions.coilVersion}"
+    }
 
-object Paging {
-    const val runtime = "androidx.paging:paging-runtime:${Versions.pagingVersion}"
-    const val compose = "androidx.paging:paging-compose:${Versions.pagingComposeVersion}"
+    object Koin {
+        const val android = "io.insert-koin:koin-android:${Versions.koinVersion}"
+        const val workManager = "io.insert-koin:koin-androidx-workmanager:${Versions.koinVersion}"
+        const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koinVersion}"
+    }
+
+    object Paging {
+        const val runtime = "androidx.paging:paging-runtime:${Versions.pagingVersion}"
+        const val compose = "androidx.paging:paging-compose:${Versions.pagingComposeVersion}"
+    }
+
+    const val androidDecompose =
+        "com.arkivanov.decompose:extensions-android:${Versions.decomposeVersion}"
+    const val decomposeExtension =
+        "com.arkivanov.decompose:extensions-compose-jetpack:${Versions.decomposeVersion}"
+
 }

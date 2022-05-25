@@ -41,6 +41,7 @@ kotlin {
                 implementation(Dependencies.Coroutines.core)
 
                 implementation(Dependencies.Koin.core)
+                implementation(Dependencies.decompose)
 
                 api("dev.icerock.moko:resources:0.20.0")
                 api("dev.icerock.moko:parcelize:0.8.0")
@@ -114,6 +115,7 @@ object Versions {
     const val ktorVersion = "2.0.1"
     const val serializationVersion = "1.2.2"
     const val koinVersion = "3.2.0"
+    const val decompose = "0.6.0"
 }
 
 object Dependencies {
@@ -142,4 +144,6 @@ object Dependencies {
     }
 
     const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.serializationVersion}"
+
+    const val decompose = "com.arkivanov.decompose:decompose:${Versions.decompose}"
 }
